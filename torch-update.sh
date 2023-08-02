@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-PKGS=(pytorch torch-data torch-vision torch-text torch-audio torch-benchmark)
+PKGS=(pytorch torch-data torch-vision torch-text torch-audio torchbenchmark)
 
 cd ~/git
 for pkg in ${PKGS[@]}; do

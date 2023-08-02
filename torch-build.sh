@@ -5,7 +5,6 @@ set -e
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source $SCRIPT_DIR/pytorch-build.sh $@
 
-pip uninstall -y torchvision torchtext torchaudio torchdata torchbenchmark
 
 PKGS=(data vision text audio)
 
@@ -15,10 +14,12 @@ cd ~/git/
 rm -rf torch-vision/build
 
 for pkg in ${PKGS[@]}; do
+  pip uninstall -y "torch${pkg}"
   pushd "torch-${pkg}"
   python setup.py install
   popd
 done
 
-pushd torch-benchmark
+pip uninstall -y torchbenchmark
+pushd torchbenchmark
 python install.py
