@@ -1,29 +1,35 @@
 # Compiling PyTorch
 
-If you don't have gcc, g++, install them from apt-get.
+### Setting up the environment
 
-**Note: Installing a previous compiler at your own risk**
+- [If you have an old version] Install `gcc` and `g++` from `apt-get`
+
+**Optional: Installing an older compiler**.
 If you want to go the extra mile, you can install gcc-9, g++-9, as this is the minimum required version.
 This will help you make sure the code you write works on these compilers.
 Note that to do this you might need to do something along the lines of https://askubuntu.com/a/26518
 At the time of this writing, I got some errors when compiling cublasLt as it was using a custom g++10
 
 
-Install the Nvidia drivers from https://www.nvidia.com/download/index.aspx
+- [If you don't have them] Install the Nvidia drivers from https://www.nvidia.com/download/index.aspx
 
-Then create the conda environment
-```bash
-conda env create -f pytorch-dev.yaml
-```
-We also set python=3.8 in `pytorch-dev.yaml`, as this is the minimum required version in PyTorch, and this disallows us from using features that are "too new".
+- Set all the occurences of the CUDA version to the correct CUDA version in `pytorch-dev.yaml`
 
-Have a read through the `pytorch-*` and `torch-*` scripts and change them as needed.
+- Create the conda environment: `conda env create -f pytorch-dev.yaml`
 
-Finally, running `torch-clone.sh` and `torch-build.sh` should give you a working torchbench installation.
+**Python version**. We set python=3.8 in `pytorch-dev.yaml`, as this is the minimum required version in PyTorch, and this disallows us from using features that are "too new".
+To debug some issues that may not reproduce on Python 3.8, you may need to create a different env with a newer Python version.
 
-The folder structure is defined in `torch-clone.py` and is given by `~/git/{pytorch,torch-audio,torch-benchmark,torch-data,torch-text,torch-vision}`.
 
-If you are just working on PyTorch, you probably won't need `torch-build.sh` but simply `pytorch-build.sh`.
+### Building PyTorch and due diligence
+
+- Have a read through the `pytorch-*` and `torch-*` scripts and edit them as needed.
+  - You will at least need to set `CUDA_PATH` and `TORCH_CUDA_ARCH_LIST` correctly in `torch-common.py`.
+  - These scripts give you "sane defaults", but feel free to tailor them to your liking.
+- Running `torch-clone.sh` will download PyTorch and all the domain libraries. If you just want PyTorch, you can edit the script accordingly.
+- Running `pytorch-build.sh` will compile PyTorch.
+- Running `torch-build.sh` will compile PyTorch, the domain libs, and torchbench. Most people won't need this.
+- Running `torch-update.sh` checks out the last `main` in all the libraries. Useful if you haven't compiled in a while.
 
 
 # Running torchbench
@@ -59,3 +65,4 @@ You need to:
 2. Disable Turbo Boost. The CPU might not have it, if the directory `/sys/devices/system/cpu/intel_pstate` does not exist, no need to do anything. If it does exist, look at `set_intel_no_turbo_state` and `set_pstate_frequency` in `machine_config.py`.
 3. Set Intel c-state to 1. You need to edit `/etc/default/grub` and add `intel_idle.max_cstate=1` to the `GRUB_CMDLINE_LINUX_DEFAULT` variable. Then run `sudo update-grub` and reboot.
 3. CPU core isolation. This might not be strictly necessary if you can make sure there are no other processes running in the machine when running the benchmarks. The idea is to tell the OS not use some CPU cores at all unless they are specifically requested by `taskset`. Note that if you do this it will make all other workflows (such as compilation) slower since they will have less cores they can use.  To do this follow the same steps as in previous point but instead of `intel_idle.max_cstate=1` add `isolcpus=6-11` where `6-11` is the range of cores you want to isolate.
+
