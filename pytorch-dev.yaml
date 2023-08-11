@@ -31,6 +31,8 @@ dependencies:
   - pytorch::magma-cuda118
   - conda-forge::cuda-version=11.8
   - conda-forge::cudnn
+  # The following 6 packages install cudatoolkit
+  # Not necessary in qgpu as it's installed system-wide
   - cuda-libraries-dev
   - cuda-nvcc
   - cuda-gdb

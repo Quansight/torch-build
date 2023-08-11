@@ -1,13 +1,10 @@
 # Cores used during compilation
 # Use this logic, or simpyl set the JOBS variable manually
 # If you're sharing a box, be mindful of not choking the computer during compilation
-CORES_PER_SOCKET=`lscpu | grep 'Core(s) per socket' | awk '{print $NF}'`
-NUMBER_OF_SOCKETS=`lscpu | grep 'Socket(s)' | awk '{print $NF}'`
+CORES_PER_SOCKET=$(lscpu | grep 'Core(s) per socket' | awk '{print $NF}')
+NUMBER_OF_SOCKETS=$(lscpu | grep 'Socket(s)' | awk '{print $NF}')
 export NCORES=$((CORES_PER_SOCKET * NUMBER_OF_SOCKETS))
-# If hyperthreading is on, we use all the cores, otherwise, we leave a core unused to avoid choking the box
-THREADS_PER_CORE=`lscpu | grep 'Thread(s) per core' | awk '{print $NF}'`
-if ((THREADS_PER_CORE > 1)); then JOBS=$NCORES; else JOBS=$((NCORES - 1)); fi
-export MAX_JOBS=${MAX_JOBS:-$JOBS}
+export MAX_JOBS=${MAX_JOBS:-$NCORES}
 
 
 # Compilation type
@@ -40,7 +37,8 @@ export USE_XNNPACK=0                              # quantized
 # cmake from conda
 export CMAKE_PREFIX_PATH=$CONDA_PREFIX
 
-# nvidia-toolkit from conda. If you have it installed system-wide point CUDA_PATH to the right folder
+# Use cudatoolkit from conda (see pytorch-dev.yaml)
+# If you have it installed system-wide (e.g. in qgpu) point CUDA_PATH to the right folder
 export CUDA_PATH=$CONDA_PREFIX
 export CUDA_HOME=$CUDA_PATH
 export CMAKE_CUDA_COMPILER=$CUDA_PATH/bin/nvcc
