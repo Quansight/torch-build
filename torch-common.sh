@@ -14,7 +14,7 @@ export CMAKE_BUILD_TYPE=Release
 
 # CUDA
 export USE_CUDA=1
-export TORCH_CUDA_ARCH_LIST="8.0"                 # A100. Set to 7.5 for qgpu
+export TORCH_CUDA_ARCH_LIST="7.5"                 # A100. Set to 7.5 for qgpu
 # Faster recompilation
 export USE_PRECOMPILED_HEADERS=1
 export USE_PER_OPERATOR_HEADERS=1
@@ -33,6 +33,7 @@ export USE_NCCL=0                                 # distributed
 export USE_GLOO=0                                 # distributed
 export USE_QNNPACK=0                              # quantized
 export USE_XNNPACK=0                              # quantized
+export USE_CUSPARSELT=0                           # slower sparse
 # Disable these unless you are going to benchmark them
 export USE_FLASH_ATTENTION=0
 export USE_MEM_EFF_ATTENTION=0

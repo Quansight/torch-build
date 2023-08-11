@@ -77,6 +77,11 @@ dependencies:
   # triton dependencies, if building from source
   - zlib
 
+  # lezcano
+  - flake8
+  - git-delta
+
   # torchbench dependencies that may cause issues if installed by pip
   # - pandas
   # - transformers
+
