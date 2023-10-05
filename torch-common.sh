@@ -31,7 +31,12 @@ export BUILD_CAFFE2_OPS=0                         # caffe2
 export USE_DISTRIBUTED=0                          # distributed
 export USE_NCCL=0                                 # distributed
 export USE_GLOO=0                                 # distributed
+export USE_QNNPACK=0                              # quantized
 export USE_XNNPACK=0                              # quantized
+# Disable these unless you are going to benchmark them
+export USE_FLASH_ATTENTION=0
+export USE_MEM_EFF_ATTENTION=0
+
 
 
 # cmake from conda
