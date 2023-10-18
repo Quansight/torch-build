@@ -24,7 +24,7 @@ To debug some issues that may not reproduce on Python 3.8, you may need to creat
 ### Building PyTorch and due diligence
 
 - Have a read through the `pytorch-*` and `torch-*` scripts and edit them as needed.
-  - You will at least need to set `CUDA_PATH` and `TORCH_CUDA_ARCH_LIST` correctly in `torch-common.py`.
+  - You will at least need to set `CUDA_PATH` and `TORCH_CUDA_ARCH_LIST` correctly in `torch-common.sh`.
   - These scripts give you "sane defaults", but feel free to tailor them to your liking.
 - Running `torch-clone.sh` will download PyTorch and all the domain libraries. If you just want PyTorch, you can edit the script accordingly.
 - Running `pytorch-build.sh` will compile PyTorch.

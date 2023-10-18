@@ -6,7 +6,7 @@ PKGS=(pytorch torch-data torch-vision torch-text torch-audio torchbenchmark)
 cd ~/git
 for pkg in ${PKGS[@]}; do
   if [ ! -d $pkg ]; then
-    echo "Directory $pkg does not exist. Please run torch-clone.py first!"
+    echo "Directory $pkg does not exist. Please run torch-clone.sh first!"
     exit 1
   fi
 done
