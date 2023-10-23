@@ -16,7 +16,7 @@ for pkg in ${PKGS[@]}; do
   git fetch origin
   git checkout main
   git rebase origin/main
-  git submodule update --init --recursive --jobs 0
+  git submodule update --init --recursive --jobs 1
   git prune
   popd
 done
