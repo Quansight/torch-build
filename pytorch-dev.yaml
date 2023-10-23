@@ -17,6 +17,7 @@ dependencies:
   - pytest
   - pytest-sugar
   - pytest-xdist
+  - expecttest
   - typing_extensions
   - hypothesis
   - scipy
@@ -39,5 +40,4 @@ dependencies:
   - cuda-cupti
   - pip:
     - lintrunner
-    - expecttest
     - ghstack
