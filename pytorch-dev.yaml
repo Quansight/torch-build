@@ -24,6 +24,12 @@ dependencies:
   - scikit-build
   - pandas
   - ipython
+  - filelock
+  - typing-extensions
+  - sympy
+  - networkx
+  - jinja2
+  - fsspec
   - ccache
   - sysroot_linux-64>=2.17
   # cuda stuff
