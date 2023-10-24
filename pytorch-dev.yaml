@@ -1,8 +1,6 @@
 name: pytorch-dev
 channels:
   - conda-forge
-  - pytorch
-  - nvidia/label/cuda-11.8.0
 dependencies:
   - python=3.8
   - numpy
@@ -19,18 +17,27 @@ dependencies:
   - pytest
   - pytest-sugar
   - pytest-xdist
+  - expecttest
+  - lintrunner
+  - ghstack
   - typing_extensions
   - hypothesis
   - scipy
   - scikit-build
   - pandas
   - ipython
+  - filelock
+  - typing-extensions
+  - sympy
+  - networkx
+  - jinja2
+  - fsspec
   - ccache
   - sysroot_linux-64>=2.17
   # cuda stuff
-  - pytorch::magma-cuda118
-  - conda-forge::cuda-version=11.8
-  - conda-forge::cudnn
+  - magma
+  - cuda-version=12.0
+  - cudnn
   # The following 6 packages install cudatoolkit
   # Not necessary in qgpu as it's installed system-wide
   - cuda-libraries-dev
@@ -39,7 +46,3 @@ dependencies:
   - cuda-nvtx
   - cuda-nvml-dev
   - cuda-cupti
-  - pip:
-    - lintrunner
-    - expecttest
-    - ghstack
