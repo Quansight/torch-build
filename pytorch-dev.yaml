@@ -43,6 +43,6 @@ dependencies:
   - cuda-libraries-dev
   - cuda-nvcc
   - cuda-gdb
-  - cuda-nvtx
+  - cuda-nvtx-dev
   - cuda-nvml-dev
   - cuda-cupti
