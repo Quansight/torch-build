@@ -43,10 +43,18 @@ export USE_MEM_EFF_ATTENTION=0
 export CMAKE_PREFIX_PATH=$CONDA_PREFIX
 
 # Use cudatoolkit from conda (see pytorch-dev.yaml)
-# If you have it installed system-wide (e.g. in qgpu) point CUDA_PATH to the right folder
-export CUDA_PATH=$CONDA_PREFIX
+# If you have it installed system-wide (e.g. in qgpu) point CUDA_PATH and CMAKE_CUDA_COMPILER
+# to the right folder
+#
+# Note: targets/x86_64-linux is added because of the use of deprecated find_package(CUDA).
+# Usually `cuda_runtime.h` is found in CUDA_HOME and find_package(CUDA) expects that.
+# However with conda, cuda headers are in $CUDA_HOME/targets/x86_64-linux/include
+# instead of $CUDA_HOME/include to avoid cloberring the top level directory with names like
+# mma.h. The new way `enable_languages(CUDA)` knows about this, but pytorch uses both
+# mechanisms.
+export CUDA_PATH=$CONDA_PREFIX/targets/x86_64-linux
 export CUDA_HOME=$CUDA_PATH
-export CMAKE_CUDA_COMPILER=$CUDA_PATH/bin/nvcc
+export CMAKE_CUDA_COMPILER=$CONDA_PREFIX/bin/nvcc
 
 # ccache
 export CMAKE_C_COMPILER_LAUNCHER=ccache
