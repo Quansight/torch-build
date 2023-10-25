@@ -2,18 +2,15 @@
 
 ### Setting up the environment
 
-- [If you have an old version] Install `gcc` and `g++` from `apt-get`
-
 **Optional: Installing an older compiler**.
-If you want to go the extra mile, you can install gcc-9, g++-9, as this is the minimum required version.
+If you want to go the extra mile, you can install gcc 9, as this is the minimum required version.
 This will help you make sure the code you write works on these compilers.
-Note that to do this you might need to do something along the lines of https://askubuntu.com/a/26518
-At the time of this writing, I got some errors when compiling cublasLt as it was using a custom g++10
-
+To do this, add `gxx=9` to `pytorch-dev.yaml` file. At the time of this writing, building with conda
+gxx=9 requires cuda-nvcc to be installed from conda as well.
 
 - [If you don't have them] Install the Nvidia drivers from https://www.nvidia.com/download/index.aspx
 
-- Set all the occurences of the CUDA version to the correct CUDA version in `pytorch-dev.yaml`
+- Set the correct CUDA version in `pytorch-dev.yaml` by changing the line `cuda-version=12.0`
 
 - Create the conda environment: `conda env create -f pytorch-dev.yaml`
 
