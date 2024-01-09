@@ -1,6 +1,7 @@
 name: pytorch-dev
 channels:
   - conda-forge
+  - nodefaults
 dependencies:
   - python=3.8
   - numpy
@@ -36,13 +37,37 @@ dependencies:
   - sysroot_linux-64>=2.17
   # cuda stuff
   - magma
-  - cuda-version=12.0
-  - cudnn
-  # The following 6 packages install cudatoolkit
+  - cuda-version=12.1
+  - cudnn # nvidia::cudnn is too old
+  # The following packages install cudatoolkit
   # Not necessary in qgpu as it's installed system-wide
-  - cuda-libraries-dev
-  - cuda-nvcc
-  - cuda-gdb
-  - cuda-nvtx-dev
-  - cuda-nvml-dev
-  - cuda-cupti
+  # NOTE: We need to avoid installing cudatoolkit from conda-forge
+  # as it doesn't play well with pytorch or its domain libraries
+  - nvidia/label/cuda-12.1.0::cuda-libraries-dev
+  - nvidia/label/cuda-12.1.0::cuda-nvcc
+  - nvidia/label/cuda-12.1.0::cuda-gdb
+  - nvidia/label/cuda-12.1.0::cuda-nvtx
+  - nvidia/label/cuda-12.1.0::cuda-nvml-dev
+  - nvidia/label/cuda-12.1.0::cuda-nvrtc
+  - nvidia/label/cuda-12.1.0::cuda-nvrtc-dev
+  - nvidia/label/cuda-12.1.0::cuda-cupti
+  - nvidia/label/cuda-12.1.0::cuda-cudart
+  - nvidia/label/cuda-12.1.0::cuda-cudart-dev
+  - nvidia/label/cuda-12.1.0::cuda-cudart-static
+  - nvidia/label/cuda-12.1.0::cuda-cccl
+  - nvidia/label/cuda-12.1.0::cuda-opencl
+  - nvidia/label/cuda-12.1.0::cuda-opencl-dev
+  - nvidia/label/cuda-12.1.0::cuda-driver-dev
+  - nvidia/label/cuda-12.1.0::cuda-profiler-api
+  - nvidia/label/cuda-12.1.0::libcufft
+  - nvidia/label/cuda-12.1.0::libcublas
+  - nvidia/label/cuda-12.1.0::libcurand
+  - nvidia/label/cuda-12.1.0::libcufile
+  - nvidia/label/cuda-12.1.0::libcusparse
+  - nvidia/label/cuda-12.1.0::libcusolver
+
+  # Compilers (optional, but recommended)
+  - gcc=12
+  - gxx=12
+  - c-compiler
+  - cxx-compiler
