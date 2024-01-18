@@ -36,7 +36,7 @@ dependencies:
   - sysroot_linux-64>=2.17
   # cuda stuff
   - magma
-  - cuda-version=12.0
+  - cuda-version=12.1
   - cudnn
   # The following 6 packages install cudatoolkit
   # Not necessary in qgpu as it's installed system-wide
