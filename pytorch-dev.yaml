@@ -46,3 +46,9 @@ dependencies:
   - cuda-nvtx-dev
   - cuda-nvml-dev
   - cuda-cupti
+
+  # Compilers (optional, but recommended)
+  - gcc=12
+  - gxx=12
+  - c-compiler
+  - cxx-compiler
