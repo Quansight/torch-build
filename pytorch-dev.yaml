@@ -35,6 +35,8 @@ dependencies:
   - fsspec
   - ccache
   - sysroot_linux-64>=2.17
+  # Needed to find cuda by triton
+  - conda-gcc-specs
   # cuda stuff
   - magma
   - cuda-version=12.1
