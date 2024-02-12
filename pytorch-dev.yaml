@@ -39,7 +39,7 @@ dependencies:
   - conda-gcc-specs
   # Keep this even if you are using system wide cudatoolkit
   # to allow gcc to find libcuda.so for triton
-  - cuda-drivers-dev
+  - cuda-driver-dev
   # cuda stuff
   - magma
   - cuda-version=12.1
