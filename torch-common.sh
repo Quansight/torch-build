@@ -1,8 +1,8 @@
 # Cores used during compilation
 # Use this logic, or simply set the JOBS variable manually
 # If you are sharing a box, be mindful of not choking the computer during compilation
-CORES_PER_SOCKET=`lscpu | grep 'Core(s) per socket' | awk '{print $NF}'`
-NUMBER_OF_SOCKETS=`lscpu | grep 'Socket(s)' | awk '{print $NF}'`
+CORES_PER_SOCKET=$(lscpu | grep 'Core(s) per socket' | awk '{print $NF}')
+NUMBER_OF_SOCKETS=$(lscpu | grep 'Socket(s)' | awk '{print $NF}')
 export NCORES=$((CORES_PER_SOCKET * NUMBER_OF_SOCKETS))
 export MAX_JOBS=${MAX_JOBS:-$NCORES}
 
