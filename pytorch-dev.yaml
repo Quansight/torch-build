@@ -42,7 +42,7 @@ dependencies:
   - cuda-driver-dev
   # cuda stuff
   - magma
-  - cuda-version=12.1
+  - cuda-version=12.2
   - cudnn
   # The following 6 packages install cudatoolkit
   # Not necessary in qgpu as it's installed system-wide

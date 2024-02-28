@@ -43,8 +43,8 @@ export USE_MEM_EFF_ATTENTION=0
 export CMAKE_PREFIX_PATH=$CONDA_PREFIX
 
 # Use cudatoolkit from conda (see pytorch-dev.yaml)
-# If you have it installed system-wide (e.g. in qgpu) point CUDA_PATH and CMAKE_CUDA_COMPILER
-# to the right folder
+# If you have it installed system-wide (e.g. in qgpu) and you want to use it,
+# point CUDA_PATH and CMAKE_CUDA_COMPILER to the right folder
 export CUDA_PATH=$CONDA_PREFIX
 export CUDA_HOME=$CUDA_PATH
 export CMAKE_CUDA_COMPILER=$CONDA_PREFIX/bin/nvcc

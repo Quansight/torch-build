@@ -2,17 +2,11 @@
 
 ### Setting up the environment
 
-**Optional: Installing an older compiler**.
-If you want to go the extra mile, you can install gcc 9, as this is the minimum required version.
-This will help you make sure the code you write works on these compilers.
-To do this, add `gxx=9` to `pytorch-dev.yaml` file. At the time of this writing, building with conda
-gxx=9 requires cuda-nvcc to be installed from conda as well.
-
-- [If you don't have them] Install the Nvidia drivers from https://www.nvidia.com/download/index.aspx
-
-- Set the correct CUDA version in `pytorch-dev.yaml` by changing the line `cuda-version=12.0`
+- Set the correct CUDA version in `pytorch-dev.yaml` by changing the line `cuda-version=12.2`
 
 - Create the conda environment: `conda env create -f pytorch-dev.yaml`
+
+- [If you don't have them] Install the Nvidia drivers from https://www.nvidia.com/download/index.aspx
 
 **Python version**. We set python=3.8 in `pytorch-dev.yaml`, as this is the minimum required version in PyTorch, and this disallows us from using features that are "too new".
 To debug some issues that may not reproduce on Python 3.8, you may need to create a different env with a newer Python version.
