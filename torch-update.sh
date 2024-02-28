@@ -13,10 +13,9 @@ done
 
 for pkg in ${PKGS[@]}; do
   pushd ${pkg}
-  git fetch origin
+  git fetch origin --prune
   git checkout main
   git rebase origin/main
   git submodule update --init --recursive
-  git prune
   popd
 done
