@@ -4,46 +4,20 @@ channels:
   - nodefaults
 dependencies:
   - python=3.8
-  - numpy
-  - ninja
-  - pyyaml
-  - mkl
-  - mkl-include
-  - setuptools
-  - cmake
-  - cffi
-  - typing
   - pip
-  - psutil
-  - pytest
-  - pytest-sugar
-  - pytest-xdist
-  - expecttest
-  - lintrunner
-  - ghstack
-  - typing_extensions
-  - hypothesis
-  - scipy
-  - scikit-build
-  - pandas
-  - ipython
-  - filelock
-  - typing-extensions
-  - sympy
-  - networkx
-  - jinja2
-  - fsspec
-  - ccache
-  - sysroot_linux-64>=2.17
-  # Needed to find cuda by triton
-  - conda-gcc-specs
-  # Keep this even if you are using system wide cudatoolkit
-  # to allow gcc to find libcuda.so for triton
-  - cuda-driver-dev
-  # cuda stuff
+
+  # Select compiler-version (optional, but recommended)
+  # These are pulled in by cuda-nvcc implicitly
+  - gcc=12
+  - gxx=12
+
+  # CUDA requirements, even if using system CUDA
   - magma
+  - cuda-driver-dev
   - cuda-version=12.2
   - cudnn
+  - conda-gcc-specs # Needed for triton to find libcuda.so
+
   # The following 6 packages install cudatoolkit
   # Not necessary in qgpu as it's installed system-wide
   - cuda-libraries-dev
@@ -51,9 +25,58 @@ dependencies:
   - cuda-gdb
   - cuda-nvtx-dev
   - cuda-nvml-dev
-  - cuda-cupti
+  - cuda-cupti-dev
 
-  # Select compiler-version (optional, but recommended)
-  # These are pulled in by cuda-nvcc implicitly
-  - gcc=12
-  - gxx=12
+  # PyTorch dependencies
+  - ccache
+  - cmake
+  - fsspec
+  - mkl
+  - mkl-include
+  - ninja
+  - packaging
+  - pyyaml
+  - scikit-build
+  - setuptools
+  - sysroot_linux-64>=2.17
+  - types-dataclasses
+  - typing
+  - typing-extensions
+  - wheel
+
+  # Test dependencies
+  - numpy
+  - expecttest
+  - hypothesis
+  - lintrunner
+  - scipy
+  - psutil
+  - pytest
+
+  # Development utilities
+  - ghstack
+  - ipython
+  - pytest-sugar
+  - pytest-xdist
+
+  # torch.compile, hard dependencies
+  - filelock
+  - sympy
+
+  # torch.compile, optional dependencies
+  - astunparse
+  - dill
+  - jinja2
+  - lark
+  - optree
+  - tabulate
+  - networkx
+  - pip:
+    - z3-solver
+
+  # triton dependencies, if building from source
+  - zlib
+
+  # torchbench dependencies that may cause issues if installed by pip
+  # - pandas
+  # - transformers
