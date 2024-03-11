@@ -37,11 +37,13 @@ Unfortunately, this is unlikely to work if you use other machines and you'll hav
 
 ## GPU benchmarks
 
-Here the main thing is to set the GPU clock frequency to a fixed value. Without this it might be scaling in response to workload. You need `nvidia-smi` installed. For A100 GPU the correct command is:
+Here the main thing is to set the GPU clock frequency to a fixed value. Without this it might be scaling in response to workload. You need `nvidia-smi` installed. For A100 GPU you can use the ``lock-clock-a100.sh` script:
 
-`sudo nvidia-smi -ac 1215,1410`
+```sh
+sudo ./lock-clock-a100.sh
+```
 
-For other GPUs, the numbers in last argument will vary. You can check
+For other GPUs, the correct clock speeds will vary. You can check
 [this AWS page](https://docs.amazonaws.cn/en_us/AWSEC2/latest/UserGuide/optimize_gpu.html) for combinations for a few different GPU models.
 
 Note that you may need to rerun this command every time the machine is rebooted, unless you enable option persistance with
