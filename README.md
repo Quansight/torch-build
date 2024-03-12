@@ -31,9 +31,10 @@ Without making some of the following changes, benchmarks you run can be highly u
 
 To run a torchbench model for CUDA devices on an A100 GPU, follow these steps:
 
-1. Build pytorch and all the domain libraries with `torch-build.sh` (See above)
-2. Lock the GPU clock rates by running `sudo lock-clock-a100.sh`
-3. Launch the appropriate benchmark-runner with the relevant arguments, e.g.
+0. Set `export USE_FLASH_ATTENTION=1` and `export USE_MEM_EFF_ATTENTION=1` in `torch-common.py`
+2. Build pytorch and all the domain libraries with `torch-build.sh` (See above)
+3. Lock the GPU clock rates by running `sudo lock-clock-a100.sh`
+4. Launch the appropriate benchmark-runner with the relevant arguments, e.g.
 ```
 PYTHONPATH=$HOME/git/torch-bench/ python benchmarks/dynamo/torchbench.py \
   --performance --inductor --train --amp --only hf_GPT2
