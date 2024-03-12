@@ -19,7 +19,7 @@ To debug some issues that may not reproduce on Python 3.8, you may need to creat
   - These scripts give you "sane defaults", but feel free to tailor them to your liking.
 - Running `torch-clone.sh` will download PyTorch and all the domain libraries. If you just want PyTorch, you can edit the script accordingly.
 - Running `pytorch-build.sh` will compile PyTorch.
-- Running `torch-build.sh` will compile PyTorch, the domain libs, and torchbench. Most people won't need this.
+- Running `torch-build.sh` will compile PyTorch, the domain libs, and torchbench.
 - Running `torch-update.sh` checks out the last `main` in all the libraries. Useful if you haven't compiled in a while.
 
 
@@ -27,30 +27,29 @@ To debug some issues that may not reproduce on Python 3.8, you may need to creat
 
 Without making some of the following changes, benchmarks you run can be highly unstable, varying as much as 10% from run to run, even if you are running each benchmark multiple times. Note that you require root to be able to enact most of them.
 
-In the `torchbench` repo there is a script to do the configuration for a specific AWS instance that the Meta team uses for the benchmarks (g4dn.metal). You can run it with the command
+## GPU benchmarks
+
+To run a torchbench model for CUDA devices on an A100 GPU, follow these steps:
+
+1. Build pytorch and all the domain libraries with `torch-build.sh` (See above)
+2. Lock the GPU clock rates by running `sudo lock-clock-a100.sh`
+3. Launch the appropriate benchmark-runner with the relevant arguments, e.g.
+```
+PYTHONPATH=$HOME/git/torch-bench/ python benchmarks/dynamo/torchbench.py \
+  --performance --inductor --train --amp --only hf_GPT2
+```
+In the same directory there are also `huggingface.py` and `timm_models.py` which
+are run in a similar manner.
+
+## CPU benchmarks
+
+If using an AWS instance (g4dn.metal), there is a script used by the Meta team for their benchmarks which is found in the `torchbench` repo. You can run it with the command
 
 ```
 sudo $(which python) torchbenchmark/util/machine_config.py --configure
 ```
 
-Unfortunately, this is unlikely to work if you use other machines and you'll have to do the steps manually.
-
-## GPU benchmarks
-
-Here the main thing is to set the GPU clock frequency to a fixed value. Without this it might be scaling in response to workload. You need `nvidia-smi` installed. For A100 GPU the correct command is:
-
-`sudo nvidia-smi -ac 1215,1410`
-
-For other GPUs, the numbers in last argument will vary. You can check
-[this AWS page](https://docs.amazonaws.cn/en_us/AWSEC2/latest/UserGuide/optimize_gpu.html) for combinations for a few different GPU models.
-
-Note that you may need to rerun this command every time the machine is rebooted, unless you enable option persistance with
-
-`sudo nvidia-smi --persistence-mode=1`
-
-## CPU benchmarks
-
-You need to:
+For other machines, a similar result can be achieved manually by following these steps:
 
 1. Disable hyperthreading. Look at what the `set_hyper_threading` function in the `torchbenchmark/util/machine_config.py` does.
 2. Disable Turbo Boost. The CPU might not have it, if the directory `/sys/devices/system/cpu/intel_pstate` does not exist, no need to do anything. If it does exist, look at `set_intel_no_turbo_state` and `set_pstate_frequency` in `machine_config.py`.
