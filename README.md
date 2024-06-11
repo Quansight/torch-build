@@ -1,10 +1,41 @@
 # Compiling PyTorch
 
+### Structure of a PyTorch build directory
+
+A PyTorch build directory contains six subdirectories:
+
+:- `pytorch/`
+- `torchbenchmark/`
+- `torch-audio/`
+- `torch-data/`
+- `torch-text/`
+- `torch-vision/`
+
+There is also the directory containing this file, `torch-build/`, which can be anywhere
+on your file system.
+
+By default, the build directory is in `~/git` but there are two ways to build PyTorch in
+other directories:
+
+1. Setting the environment variable `PYTORCH_BUILD_SUFFIX` appends this value to the
+   build directory, and also to the Conda environment which is used. For example, if
+   `PYTORCH_BUILD_SUFFIX=-grad`, then the PyTorch build directory would be created
+   in `~/git-grad` and the Conda environment would be named `pytorch-dev`.
+
+2. Or for finer grained control, you can independently set the environment variable
+   `PYTORCH_BUILD_DIRECTORY` to set the build directory, `PYTORCH_CONDA_ENV` to set
+   the name of the Conda environment
+
+By default, PyTorch is cloned from `git@github.com:pytorch/pytorch.git` but you can
+override this by setting the environment variable `PYTORCH_GIT_USER`. For example, if
+`PYTORCH_GIT_USER=octacat` then the fork `git@github.com:octacat/pytorch.git`
+will be used.
+
 ### Setting up the environment
 
 - Set the correct CUDA version in `pytorch-dev.yaml` by changing the line `cuda-version=12.2`
 
-- Create the conda environment: `conda env create -f pytorch-dev.yaml`
+- Create the conda environment: `./torch-env.sh`
 
 - [If you don't have them] Install the Nvidia drivers from https://www.nvidia.com/download/index.aspx
 
@@ -56,4 +87,3 @@ For other machines, a similar result can be achieved manually by following these
 2. Disable Turbo Boost. The CPU might not have it, if the directory `/sys/devices/system/cpu/intel_pstate` does not exist, no need to do anything. If it does exist, look at `set_intel_no_turbo_state` and `set_pstate_frequency` in `machine_config.py`.
 3. Set Intel c-state to 1. You need to edit `/etc/default/grub` and add `intel_idle.max_cstate=1` to the `GRUB_CMDLINE_LINUX_DEFAULT` variable. Then run `sudo update-grub` and reboot.
 3. CPU core isolation. This might not be strictly necessary if you can make sure there are no other processes running in the machine when running the benchmarks. The idea is to tell the OS not use some CPU cores at all unless they are specifically requested by `taskset`. Note that if you do this it will make all other workflows (such as compilation) slower since they will have less cores they can use.  To do this follow the same steps as in previous point but instead of `intel_idle.max_cstate=1` add `isolcpus=6-11` where `6-11` is the range of cores you want to isolate.
-

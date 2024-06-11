@@ -1,11 +1,12 @@
 #!/bin/bash
 set -e
 
-mkdir -p ~/git
-cd ~/git
+mkdir -p ${PYTORCH_BUILD_DIRECTORY:=~/git$PYTORCH_BUILD_SUFFIX}
+cd $PYTORCH_BUILD_DIRECTORY
 
 # PyTorch
-git clone git@github.com:pytorch/pytorch.git
+git clone git@github.com:${PYTORCH_GIT_USER:=pytorch}/pytorch.git
+
 
 # Domain Libraries
 PKGS=(data vision text audio)

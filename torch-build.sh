@@ -10,7 +10,7 @@ PKGS=(data vision text audio)
 
 export BUILD_SOX=0
 
-cd ~/git/
+cd ${PYTORCH_BUILD_DIRECTORY:=~/git$PYTORCH_BUILD_SUFFIX}
 rm -rf torch-vision/build
 
 for pkg in ${PKGS[@]}; do
