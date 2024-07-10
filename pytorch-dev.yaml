@@ -5,6 +5,7 @@ channels:
 dependencies:
   - python=3.8
   - pip
+  - python=*=*_cpython
 
   # Select compiler-version (optional, but recommended)
   # These are pulled in by cuda-nvcc implicitly
