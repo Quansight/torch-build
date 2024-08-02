@@ -6,7 +6,9 @@ cd $PYTORCH_BUILD_DIRECTORY
 
 # PyTorch
 git clone git@github.com:${PYTORCH_GIT_USER:=pytorch}/pytorch.git
-
+pushd pytorch
+git submodule update --init --recursive
+popd
 
 # Domain Libraries
 PKGS=(data vision text audio)
