@@ -78,6 +78,9 @@ dependencies:
   # triton dependencies, if building from source
   - zlib
 
+  # torch.compile halide backend
+  - halide-python
+
   # torchbench dependencies that may cause issues if installed by pip
   # - pandas
   # - transformers
