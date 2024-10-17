@@ -1,0 +1,88 @@
+name: pytorch-dev
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.13
+  - python-freethreading
+  - pip
+  - cpython
+
+  # Select compiler-version (optional, but recommended)
+  # These are pulled in by cuda-nvcc implicitly
+  - gcc=12
+  - gxx=12
+
+  # CUDA requirements, even if using system CUDA
+  - magma
+  - cuda-driver-dev
+  - cuda-version=12.4
+  - cudnn
+  - conda-gcc-specs # Needed for triton to find libcuda.so
+
+  # The following 6 packages install cudatoolkit
+  # Not necessary in qgpu as it's installed system-wide
+  - cuda-libraries-dev
+  - cuda-nvcc
+  - cuda-gdb
+  - cuda-nvtx-dev
+  - cuda-nvml-dev
+  - cuda-cupti-dev
+
+  # PyTorch dependencies
+  - ccache
+  - cmake
+  - fsspec
+  - mkl
+  - mkl-include
+  - ninja
+  - packaging
+  #- pyyaml
+  - scikit-build
+  - setuptools
+  - sysroot_linux-64>=2.17
+  - types-dataclasses
+  - typing
+  - typing-extensions
+  - wheel
+
+  # Test dependencies
+  - numpy
+  - expecttest
+  - hypothesis
+  - lintrunner
+  #- scipy
+  - psutil
+  - pytest
+
+  # Development utilities
+  #- ghstack
+  - ipython
+  - pytest-sugar
+  - pytest-xdist
+
+  # torch.compile, hard dependencies
+  - filelock
+  - sympy
+
+  # torch.compile, optional dependencies
+  - astunparse
+  - dill
+  - jinja2
+  - lark
+  #- optree
+  - tabulate
+  - networkx
+  - pip:
+    - pyyaml
+    - z3-solver
+
+  # triton dependencies, if building from source
+  - zlib
+
+  # torch.compile halide backend
+  #- halide-python
+
+  # torchbench dependencies that may cause issues if installed by pip
+  # - pandas
+  # - transformers
