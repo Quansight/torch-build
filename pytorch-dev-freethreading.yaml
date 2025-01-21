@@ -37,7 +37,7 @@ dependencies:
   - mkl-include
   - ninja
   - packaging
-  #- pyyaml
+  - pyyaml
   - scikit-build
   - setuptools
   - sysroot_linux-64>=2.17
