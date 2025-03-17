@@ -1,0 +1,56 @@
+name: pytorch-dev
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.9
+  - pip
+  - cpython
+  - compilers
+  - clang=18
+
+  # PyTorch dependencies
+  - ccache
+  - cmake
+  - fsspec
+  - ninja
+  - packaging
+  - pyyaml
+  - scikit-build
+  - setuptools
+  - types-dataclasses
+  - typing
+  - typing-extensions
+  - wheel
+
+  # Test dependencies
+  - numpy
+  - expecttest
+  - hypothesis
+  - scipy
+  - psutil
+  - pytest
+
+  # Development utilities
+  - ghstack
+  - ipython
+  - pytest-sugar
+  - pytest-xdist
+
+  # torch.compile, hard dependencies
+  - filelock
+  - sympy
+
+  # torch.compile, optional dependencies
+  - astunparse
+  - dill
+  - jinja2
+  - lark
+  - optree
+  - tabulate
+  - networkx
+  - pip:
+    - z3-solver
+
+  # triton dependencies, if building from source
+  - zlib
