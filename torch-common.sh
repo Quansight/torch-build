@@ -1,11 +1,12 @@
 # Cores used during compilation
 # Use this logic, or simply set the JOBS variable manually
 # If you are sharing a box, be mindful of not choking the computer during compilation
-CORES_PER_SOCKET=$(lscpu | grep 'Core(s) per socket' | awk '{print $NF}')
-NUMBER_OF_SOCKETS=$(lscpu | grep 'Socket(s)' | awk '{print $NF}')
-export NCORES=$((CORES_PER_SOCKET * NUMBER_OF_SOCKETS))
-export MAX_JOBS=${MAX_JOBS:-$NCORES}
-
+if [[ "$(uname)" == "Linux" ]]; then
+  CORES_PER_SOCKET=$(lscpu | grep 'Core(s) per socket' | awk '{print $NF}')
+  NUMBER_OF_SOCKETS=$(lscpu | grep 'Socket(s)' | awk '{print $NF}')
+  export NCORES=$((CORES_PER_SOCKET * NUMBER_OF_SOCKETS))
+  export MAX_JOBS=${MAX_JOBS:-$NCORES}
+fi
 
 # Compilation type
 export CMAKE_BUILD_TYPE=Release
@@ -13,7 +14,11 @@ export CMAKE_BUILD_TYPE=Release
 # but makes the symbol loading phase in gdb and the linking phase in compilation much slower.
 
 # CUDA
-export USE_CUDA=1
+if [[ "$(uname)" == "Darwin" ]]; then
+  export USE_CUDA=0
+else
+  export USE_CUDA=1
+fi
 
 if [ -z "$TORCH_CUDA_ARCH_LIST" ]; then
     :
