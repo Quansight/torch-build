@@ -14,6 +14,11 @@ dependencies:
   - gxx=13
   # Add GDB, to bundle in py-bt support.
   - gdb
+  # Certain features (like cpp_wrapper for inductor) can be tested in clang as
+  # well.
+  - clang
+  - clangxx
+  - lldb
 
   # CUDA requirements, even if using system CUDA
   - magma
