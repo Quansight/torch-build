@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-PKGS=(pytorch torch-data torch-vision torch-text torch-audio torchbenchmark)
+PKGS=(pytorch torch-data torch-vision torch-audio torchbenchmark)
 
 cd ${PYTORCH_BUILD_DIRECTORY:=~/git$PYTORCH_BUILD_SUFFIX}
 
