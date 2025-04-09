@@ -2,13 +2,12 @@
 
 ### Structure of a PyTorch build directory
 
-A PyTorch build directory contains six subdirectories:
+A PyTorch build directory contains five subdirectories:
 
 :- `pytorch/`
 - `torchbenchmark/`
 - `torch-audio/`
 - `torch-data/`
-- `torch-text/`
 - `torch-vision/`
 
 There is also the directory containing this file, `torch-build/`, which can be anywhere

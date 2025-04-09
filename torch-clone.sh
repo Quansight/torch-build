@@ -15,7 +15,7 @@ fi
 popd
 
 # Domain Libraries
-PKGS=(data vision text audio)
+PKGS=(data vision audio)
 for pkg in ${PKGS[@]}; do
 	git clone git@github.com:pytorch/${pkg}.git "torch-${pkg}"
 done

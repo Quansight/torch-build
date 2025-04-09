@@ -6,7 +6,7 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source $SCRIPT_DIR/pytorch-build.sh $@
 
 
-PKGS=(data vision text audio)
+PKGS=(data vision audio)
 
 export BUILD_SOX=0
 
