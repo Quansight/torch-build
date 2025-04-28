@@ -11,7 +11,7 @@ source $SCRIPT_DIR/torch-common.sh
 
 pwd
 pip uninstall torch -y
-python setup.py develop $@
+pip install -e . --no-build-isolation -v $@
 
 # comment out if you're developing triton as well
 make triton
