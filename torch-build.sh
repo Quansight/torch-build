@@ -16,7 +16,7 @@ rm -rf torch-vision/build
 for pkg in ${PKGS[@]}; do
   pip uninstall -y "torch${pkg}"
   pushd "torch-${pkg}"
-  pip install -e . --no-build-isolation -v
+  pip install . --no-build-isolation -v
   popd
 done
 
