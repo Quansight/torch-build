@@ -2,7 +2,7 @@
 set -e
 
 mkdir -p ${PYTORCH_BUILD_DIRECTORY:=~/git$PYTORCH_BUILD_SUFFIX}
-cd $PYTORCH_BUILD_DIRECTORY
+pushd $PYTORCH_BUILD_DIRECTORY
 
 # PyTorch
 git clone git@github.com:${PYTORCH_GIT_USER:=pytorch}/pytorch.git
@@ -24,3 +24,5 @@ done
 # torchbenchmark needs to have this name and be in the same folder as
 # PyTorch, otherwise benchmarks/dynamo/torchbench.py won't find it
 git clone git@github.com:pytorch/benchmark.git "torchbenchmark"
+
+popd
