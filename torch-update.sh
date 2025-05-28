@@ -3,7 +3,7 @@ set -e
 
 PKGS=(pytorch torch-data torch-vision torch-audio torchbenchmark)
 
-cd ${PYTORCH_BUILD_DIRECTORY:=~/git$PYTORCH_BUILD_SUFFIX}
+pushd ${PYTORCH_BUILD_DIRECTORY:=~/git$PYTORCH_BUILD_SUFFIX}
 
 for pkg in ${PKGS[@]}; do
   if [ ! -d $pkg ]; then
@@ -20,3 +20,5 @@ for pkg in ${PKGS[@]}; do
   git submodule update --init --recursive
   popd
 done
+
+popd

@@ -2,7 +2,7 @@
 set -e
 
 # conda and the env vars are set correctly in pytorch-build.py
-SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+SCRIPT_DIR=$( pushd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 source $SCRIPT_DIR/pytorch-build.sh $@
 
 
@@ -23,3 +23,5 @@ done
 pip uninstall -y torchbenchmark
 pushd torchbenchmark
 python install.py
+
+popd
