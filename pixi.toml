@@ -6,7 +6,8 @@ platforms = ["linux-64"]
 version = "0.1.0"
 
 [tasks]
-build = "./torch-build.sh"
+build-core = "./pytorch-build.sh"
+build-all = "./torch-build.sh"
 update = "./torch-update.sh"
 clone = "./torch-clone.sh"
 
