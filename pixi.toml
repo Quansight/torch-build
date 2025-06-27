@@ -73,6 +73,7 @@ tabulate = "*"
 networkx = "*"
 zlib = "*"
 halide-python = "*"
+parameterized = "*"
 
 [pypi-dependencies]
 z3-solver = "*"
