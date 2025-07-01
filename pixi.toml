@@ -74,6 +74,8 @@ networkx = "*"
 zlib = "*"
 halide-python = "*"
 parameterized = "*"
+libglib = "*"
+pango = "*"
 
 [pypi-dependencies]
 z3-solver = "*"
