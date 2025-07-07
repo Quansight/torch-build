@@ -76,6 +76,7 @@ halide-python = "*"
 parameterized = "*"
 libglib = "*"
 pango = "*"
+pillow = "*"
 
 [pypi-dependencies]
 z3-solver = "*"
