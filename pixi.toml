@@ -15,6 +15,9 @@ clone = "./torch-clone.sh"
 PYTORCH_BUILD_DIRECTORY = "${PIXI_PROJECT_ROOT}/git"
 PYTORCH_PIXI_BUILD = "1"
 
+[activation]
+scripts = ["./torch-common.sh"]
+
 [dependencies]
 python = "3.9.*"
 pip = "*"
