@@ -52,6 +52,9 @@ dependencies:
   - typing-extensions
   - wheel
 
+  # required for type checking
+  - onnx-ir
+
   # Test dependencies
   - numpy
   - expecttest
