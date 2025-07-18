@@ -3,8 +3,10 @@ set -e
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-eval "$(conda shell.bash hook)"
-conda activate ${PYTORCH_CONDA_ENV:=pytorch-dev$PYTORCH_BUILD_SUFFIX}
+if ${PYTORCH_PIXI_BUILD:-0} -eq 0; then
+    eval "$(conda shell.bash hook)"
+    conda activate ${PYTORCH_CONDA_ENV:=pytorch-dev$PYTORCH_BUILD_SUFFIX}
+fi
 cd ${PYTORCH_BUILD_DIRECTORY:=~/git$PYTORCH_BUILD_SUFFIX}/pytorch
 
 source $SCRIPT_DIR/torch-common.sh
