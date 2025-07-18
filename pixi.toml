@@ -2,14 +2,14 @@
 authors = ["Hameer Abbasi <2190658+hameerabbasi@users.noreply.github.com>"]
 channels = ["conda-forge"]
 name = "pytorch-dev"
-platforms = ["linux-64"]
+platforms = ["linux-64", "osx-arm64"]
 version = "0.1.0"
 
 [tasks]
-build-core = "./pytorch-build.sh"
-build-all = "./torch-build.sh"
-update = "./torch-update.sh"
-clone = "./torch-clone.sh"
+build-core = { cmd = "./pytorch-build.sh", cwd = "." }
+build-all = { cmd = "./torch-build.sh", cwd = "." }
+update = { cmd = "./torch-update.sh", cwd = "." }
+clone = { cmd = "./torch-clone.sh", cwd = "." }
 
 [activation.env]
 PYTORCH_BUILD_DIRECTORY = "${PIXI_PROJECT_ROOT}/git"
@@ -18,43 +18,38 @@ PYTORCH_PIXI_BUILD = "1"
 [activation]
 scripts = ["./torch-common.sh"]
 
+[feature.freethreading.dependencies]
+python = "3.13.*"
+python-freethreading = "3.13.*"
+
 [dependencies]
 python = "3.9.*"
+
+[target.linux-64.dependencies]
+# These three don't have free-threading support
+lldb = "*"
+gdb = "*"
+halide-python = "*"
+
+[feature.core.dependencies]
 pip = "*"
 cpython = "*"
-gcc = "13.*"
-gxx = "13.*"
-gdb = "*"
-clang = "*"
-clangxx = "*"
-lldb = "*"
-magma = "*"
-cuda-driver-dev = "*"
-cuda-version = "12.6.*"
-cudnn = "*"
-conda-gcc-specs = "*"
-cuda-libraries-dev = "*"
-cuda-nvcc = "*"
-cuda-gdb = "*"
-cuda-nvtx-dev = "*"
-cuda-nvml-dev = "*"
-cuda-cupti-dev = "*"
-ccache = "*"
-cmake = "*"
-fsspec = "*"
-mkl = "*"
-mkl-include = "*"
+cmake = ">=3.27"
 ninja = "*"
-packaging = "*"
-pyyaml = "*"
-scikit-build = "*"
-setuptools = "*"
-sysroot_linux-64 = ">=2.17"
-types-dataclasses = "*"
-typing = "*"
-typing-extensions = "*"
-wheel = "*"
 numpy = "*"
+packaging = "*"
+pkg-config = "*"
+libuv = "*"
+pyyaml = "*"
+requests = "*"
+six = "*"
+typing-extensions = ">=4.10.0"
+ccache = "*"
+scikit-build = "*"
+setuptools = ">=70.1.0,<80.0a0"
+wheel = "*"
+fsspec = "*"
+types-dataclasses = "*"
 expecttest = "*"
 hypothesis = "*"
 lintrunner = "*"
@@ -75,11 +70,37 @@ optree = "*"
 tabulate = "*"
 networkx = "*"
 zlib = "*"
-halide-python = "*"
 parameterized = "*"
 libglib = "*"
 pango = "*"
 pillow = "*"
 
-[pypi-dependencies]
+[feature.core.target.linux-64.dependencies]
+gcc = "13.*"
+gxx = "13.*"
+clang = "*"
+clangxx = "*"
+magma = "*"
+cuda-driver-dev = "*"
+cuda-version = "12.6.*"
+cudnn = "*"
+conda-gcc-specs = "*"
+cuda-libraries-dev = "*"
+cuda-nvcc = "*"
+cuda-gdb = "*"
+cuda-nvtx-dev = "*"
+cuda-nvml-dev = "*"
+cuda-cupti-dev = "*"
+mkl = "*"
+mkl-include = "*"
+sysroot_linux-64 = ">=2.17"
+
+[feature.core.pypi-dependencies]
 z3-solver = "*"
+
+[environments]
+default = ["default", "core"]
+freethreading = { features = [
+    "freethreading",
+    "core",
+], no-default-feature = true }
