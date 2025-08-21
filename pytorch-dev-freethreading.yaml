@@ -10,8 +10,8 @@ dependencies:
 
   # Select compiler-version (optional, but recommended)
   # These are pulled in by cuda-nvcc implicitly
-  - gcc=13
-  - gxx=13
+  - gcc=14
+  - gxx=14
   # Add GDB, to bundle in py-bt support.
   - gdb
   # Certain features (like cpp_wrapper for inductor) can be tested in clang as
@@ -23,7 +23,7 @@ dependencies:
   # CUDA requirements, even if using system CUDA
   - magma
   - cuda-driver-dev
-  - cuda-version=12.6
+  - cuda-version=12.9
   - cudnn
   - conda-gcc-specs # Needed for triton to find libcuda.so
 
@@ -61,6 +61,7 @@ dependencies:
   #- scipy
   - psutil
   - pytest
+  - parameterized
 
   # Development utilities
   #- ghstack
