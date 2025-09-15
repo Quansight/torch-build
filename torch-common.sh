@@ -20,7 +20,7 @@ else
   export USE_CUDA=1
 fi
 
-if [ -z "$TORCH_CUDA_ARCH_LIST" ]; then
+if [[ -n "$TORCH_CUDA_ARCH_LIST" ]]; then
     :
 elif [[ $(hostname) = qgpu* ]]; then
     export TORCH_CUDA_ARCH_LIST="7.5"  # qgpu server
