@@ -41,9 +41,7 @@ export USE_FBGEMM=1                               # GEMMs
 export BUILD_TEST=0                               # C++ tests
 export BUILD_CAFFE2=0                             # caffe2
 export BUILD_CAFFE2_OPS=0                         # caffe2
-export USE_DISTRIBUTED=0                          # distributed
-export USE_NCCL=0                                 # distributed
-export USE_GLOO=0                                 # distributed
+export USE_SYSTEM_NCCL=1                          # distributed
 export USE_QNNPACK=0                              # quantized
 export USE_XNNPACK=0                              # quantized
 # Disable these unless you are going to benchmark them
