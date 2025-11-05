@@ -50,8 +50,7 @@ dependencies:
   - optree
   - tabulate
   - networkx
-  - pip:
-    - z3-solver
+  - z3-solver
 
   # triton dependencies, if building from source
   - zlib
