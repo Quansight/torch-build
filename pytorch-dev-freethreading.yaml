@@ -82,9 +82,8 @@ dependencies:
   #- optree
   - tabulate
   - networkx
-  - pip:
-    - pyyaml
-    - z3-solver
+  - z3-solver
+  - pyyaml
 
   # triton dependencies, if building from source
   - zlib
