@@ -16,7 +16,7 @@ done
 
 pip uninstall -y torchbenchmark
 pushd torchbenchmark
-python install.py
+python install.py --continue_on_fail
 popd
 
 # leave build directory

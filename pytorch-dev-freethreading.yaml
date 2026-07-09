@@ -16,8 +16,8 @@ dependencies:
   - gdb
   # Certain features (like cpp_wrapper for inductor) can be tested in clang as
   # well.  nvcc currently supports up to clang 21.
-  - clang<21
-  - clangxx<21
+  - clang<22
+  - clangxx<22
   - lldb
 
   # Speedup linking
