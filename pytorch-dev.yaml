@@ -22,6 +22,10 @@ dependencies:
   # Speedup linking
   - mold
 
+  # Explicitly override BLAS to use BLIS, which is significantly faster on AMD platforms
+  # (which represent all of our dev servers).
+  - libblas=*=*_blis
+
   # CUDA requirements, even if using system CUDA
   - libmagma-devel
   - cuda-driver-dev
@@ -42,8 +46,6 @@ dependencies:
   - ccache
   - cmake
   - fsspec
-  - mkl
-  - mkl-include
   - ninja
   - packaging
   - pyyaml
